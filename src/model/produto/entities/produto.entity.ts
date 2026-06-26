@@ -13,7 +13,7 @@ export class ProdutoEntity{
     @Column()
     descricao : string;
     @Column()
-    codigoDoProduto: number;
+    codigoDoProduto: string;
 
     @Column({ type : 'decimal' , precision : 10 , scale: 2 })
     valorProduto: number;
@@ -23,7 +23,7 @@ export class ProdutoEntity{
         enum : CATEGORIA_PRODUTO_VALUES,
         default: 'SEM_CATEGORIA'
     })
-    categoriaDoProduto : CategoriaProduto
+    categoriaProduto : CategoriaProduto
 
     @OneToMany(() => CaracteristicasProduto, (char) => char.produto, {
         cascade : true,

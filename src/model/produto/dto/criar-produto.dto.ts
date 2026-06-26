@@ -1,4 +1,4 @@
-import { ArrayMinSize, IsEnum, IsNotEmpty, IsNumber, IsString, Min, MinLength, ValidateNested } from "class-validator";
+import { ArrayMinSize, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, Min, MinLength, ValidateNested } from "class-validator";
 import { CaracteristicasProdutoDTO } from "./caracteristicas-produto.dto";
 import { CATEGORIA_PRODUTO_VALUES } from "../types/categoria-produto.type";
 import type { CategoriaProduto  } from "../types/categoria-produto.type";
@@ -11,11 +11,12 @@ export class CriarProdutoDTO {
     nome : string;
 
     @IsString()
+    @IsOptional()
     descricao : string;
 
     @IsNotEmpty()
     @MinLength(10, {message : "Codigo do produto deve haver mais que 10 caracteres"})
-    codigoDoProduto : number;
+    codigoDoProduto : string;
 
     @IsNumber({} , { message : 'O valor deve ser um número '})
     @Min(0.01 ,{ message : 'O valor deve ser maior que zero '})
@@ -29,5 +30,6 @@ export class CriarProdutoDTO {
     @ValidateNested({each : true})
     @Type(() => CaracteristicasProdutoDTO)
     @ArrayMinSize(1)
+    @IsOptional()
     caracteristicasDoProduto : CaracteristicasProdutoDTO[];
 }

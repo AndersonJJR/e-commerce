@@ -9,3 +9,9 @@ export class CaracteristicasProdutoDTO {
     valor : string;
 
 }
+
+export class CaracteristicasProdutoResponseDTO{
+
+    chave: string;
+    valor : string;
+}
