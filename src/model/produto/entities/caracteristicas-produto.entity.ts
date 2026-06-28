@@ -12,7 +12,9 @@ export class CaracteristicasProduto {
     valor : string;
 
     @ManyToOne(() => ProdutoEntity, (produto) => produto.caracteristicasDoProduto, {
-        onDelete : 'CASCADE'
+        onDelete : 'CASCADE',
+        onUpdate : 'CASCADE',
+        orphanedRowAction : 'delete'
     })
     @JoinColumn({ name : 'produto_id'})
     produto : ProdutoEntity;

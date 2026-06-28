@@ -27,7 +27,10 @@ export class ProdutoEntity{
 
     @OneToMany(() => CaracteristicasProduto, (char) => char.produto, {
         cascade : true,
-        eager : false
+        eager : false,
+        onDelete : 'CASCADE',
+        onUpdate : 'CASCADE',
+        orphanedRowAction : 'delete'
     })
     caracteristicasDoProduto : CaracteristicasProduto[];
 
