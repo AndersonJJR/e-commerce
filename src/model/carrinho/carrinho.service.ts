@@ -1,22 +1,28 @@
 import { Injectable } from "@nestjs/common";
-import { Repository } from "typeorm";
+import { DataSource, Repository } from "typeorm";
 import { ProdutoEntity } from "../produto/entities/produto.entity";
 import { InjectRepository } from "@nestjs/typeorm";
+import { CarrinhoEntity } from "./entities/carrinho.entity";
+import { ItemCarrinhoEntity } from "./entities/item-carrinho.entity";
+import { InjectModel } from "@nestjs/mongoose";
+import { HistoricoCarrinho } from "./entities/historico-carrinho.schema";
+import { Model } from "mongoose";
+import { ProdutoService } from "../produto/produto.service";
 
 @Injectable()
 export class CarrinhoService {
 
     constructor(
-        @InjectRepository(ProdutoEntity)
-        private readonly produtoRepository: Repository<ProdutoEntity>
+        @InjectRepository(CarrinhoEntity)
+        private carrinhoRepository : Repository<CarrinhoEntity>,
+        @InjectRepository(ItemCarrinhoEntity)
+        private carrinhoItemRepository : Repository<ItemCarrinhoEntity>,
+        @InjectModel(HistoricoCarrinho.name , 'analytics')
+        private historicoModel : Model<HistoricoCarrinho>,
+
+        private produtoService : ProdutoService,
+        private dataSource : DataSource
     ) {}
 
-    async adicionarAoCarrinho(id: string) {
-        const produto = this.produtoRepository.findOne({
-            where : {id},
-            relations : {
-                caracteristicasDoProduto : true
-            }
-        });
-    }
+    
 }

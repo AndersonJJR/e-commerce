@@ -7,25 +7,28 @@ import { ConfigModule } from '@nestjs/config';
 import { ProdutoModule } from './model/produto/produto.module';
 import { MongoDBConfigService } from './config/mongodb.config.service';
 import { MongooseModule } from '@nestjs/mongoose';
+import { CarrinhoModule } from './model/carrinho/carrinho.module';
 
 @Module({
-  imports: [ProdutoModule ,
-    ConfigModule.forRoot({
-    isGlobal : true
-  }),
-    TypeOrmModule.forRootAsync(
-    {
-    useClass : PostgresConfigService,
-    inject : [PostgresConfigService]
-  }),
+  imports: [ProdutoModule,
+    CarrinhoModule,
 
-  MongooseModule.forRootAsync({
-    useClass: MongoDBConfigService,
-    inject: [MongoDBConfigService],
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
+    TypeOrmModule.forRootAsync(
+      {
+        useClass: PostgresConfigService,
+        inject: [PostgresConfigService]
+      }),
+
+    MongooseModule.forRootAsync({
+      useClass: MongoDBConfigService,
+      inject: [MongoDBConfigService],
     }),
 
-],
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
