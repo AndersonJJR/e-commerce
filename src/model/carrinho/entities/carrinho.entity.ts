@@ -1,32 +1,38 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { ProdutoEntity } from "../../produto/entities/produto.entity";
-import { ItemCarrinhoEntity } from "./item-carrinho.entity";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { ProdutoEntity } from '../../produto/entities/produto.entity';
+import { ItemCarrinhoEntity } from './item-carrinho.entity';
 
-@Entity({name : 'Carrinho'})
-export class CarrinhoEntity{
+@Entity({ name: 'Carrinho' })
+export class CarrinhoEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @PrimaryGeneratedColumn('uuid')
-    id : string;
+  @Column()
+  userId: string;
 
-    @Column()
-    userId : string;
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  valorTotal: number;
 
-    @Column({ type: 'decimal' , precision : 10 , scale : 2 })
-    valorTotal : number;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @CreateDateColumn()
-    createdAt : Date;
+  @UpdateDateColumn()
+  updateAt: Date;
 
-    @UpdateDateColumn()
-    updateAt : Date;
+  @DeleteDateColumn()
+  deleteAt: Date;
 
-    @DeleteDateColumn()
-    deleteAt : Date;
-
-    @OneToMany(() => ItemCarrinhoEntity, (item) => item.carrinho,{
-        cascade : true,
-        eager : true
-    })
-    items : CarrinhoEntity[];
-    
+  @OneToMany(() => ItemCarrinhoEntity, (item) => item.carrinho, {
+    cascade: true,
+    eager: true,
+  })
+  items: CarrinhoEntity[];
 }

@@ -1,17 +1,14 @@
-import { IsString } from "class-validator";
+import { IsString } from 'class-validator';
 
 export class CaracteristicasProdutoDTO {
-    
-    @IsString()
-    chave : string;
+  @IsString()
+  chave: string;
 
-    @IsString()
-    valor : string;
-
+  @IsString()
+  valor: string;
 }
 
-export class CaracteristicasProdutoResponseDTO{
-
-    chave: string;
-    valor : string;
+export class CaracteristicasProdutoResponseDTO {
+  chave: string;
+  valor: string;
 }

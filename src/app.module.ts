@@ -8,9 +8,11 @@ import { ProdutoModule } from './model/produto/produto.module';
 import { MongoDBConfigService } from './config/mongodb.config.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CarrinhoModule } from './model/carrinho/carrinho.module';
+import { UsuarioModule } from './model/usuario/usuario.module';
 
 @Module({
   imports: [
+    UsuarioModule,
     ProdutoModule,
     ConfigModule.forRoot({
       isGlobal: true,
@@ -29,4 +31,4 @@ import { CarrinhoModule } from './model/carrinho/carrinho.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
