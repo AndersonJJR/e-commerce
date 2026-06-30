@@ -11,7 +11,8 @@ import { ProdutoService } from "./produto.service";
         CaracteristicasProduto
     ])],
     controllers : [ProdutoController],
-    providers : [ProdutoService]
+    providers : [ProdutoService],
+    exports : [ProdutoService]
 })
 export class ProdutoModule {
 }

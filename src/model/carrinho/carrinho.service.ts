@@ -24,5 +24,10 @@ export class CarrinhoService {
         private dataSource : DataSource
     ) {}
 
-    
+    async buscarOuCriarCarrinho(userId : string){
+        let carrinho = await this.carrinhoRepository.findOne({
+            where : {userId},
+            relations : { items : true } 
+        })
+    }
 }

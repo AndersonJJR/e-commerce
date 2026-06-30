@@ -10,23 +10,21 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CarrinhoModule } from './model/carrinho/carrinho.module';
 
 @Module({
-  imports: [ProdutoModule,
-    CarrinhoModule,
-
+  imports: [
+    ProdutoModule,
     ConfigModule.forRoot({
-      isGlobal: true
+      isGlobal: true,
     }),
-    TypeOrmModule.forRootAsync(
-      {
-        useClass: PostgresConfigService,
-        inject: [PostgresConfigService]
-      }),
-
+    TypeOrmModule.forRootAsync({
+      useClass: PostgresConfigService,
+      inject: [PostgresConfigService],
+    }),
     MongooseModule.forRootAsync({
+      connectionName: 'analytics',
       useClass: MongoDBConfigService,
       inject: [MongoDBConfigService],
     }),
-
+    CarrinhoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -17,7 +17,6 @@ export class MongoDBConfigService implements MongooseOptionsFactory {
 
     return {
       uri,
-      connectionName: 'analytics', 
     };
   }
 }
